@@ -2,6 +2,8 @@
 
 **A stereo compressor plugin for macOS, Windows and Linux (VST3 · AU · CLAP · VST2).**
 
+Part of **[Epsilon Audio](https://github.com/natehouk/epsilon-plugins)**, a family of free, open-source plugins: Monolith, Caldera, Obsidian, Strata, Basalt and Gneiss.
+
 ![Gneiss](screenshot.png)
 
 Gneiss is a clean-room design with the feature set of FabFilter Pro-C, FabFilter's sixth plugin (August 2007), including the A/B comparison and undo/redo added in Pro-C 1.10. It was written from scratch, working only from FabFilter's public press releases. No FabFilter code, binaries, presets, artwork or trademarks were used.
