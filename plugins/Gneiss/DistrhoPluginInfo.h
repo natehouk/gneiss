@@ -3,7 +3,7 @@
 
 #define DISTRHO_PLUGIN_BRAND   "Epsilon Audio"
 #define DISTRHO_PLUGIN_NAME    "Gneiss"
-#define DISTRHO_PLUGIN_URI     "https://epsilonrecords.com/plugins/gneiss"
+#define DISTRHO_PLUGIN_URI     "https://plugins.epsilonrecords.com/gneiss"
 #define DISTRHO_PLUGIN_CLAP_ID "com.epsilonrecords.gneiss"
 
 #define DISTRHO_PLUGIN_BRAND_ID  EpsA
