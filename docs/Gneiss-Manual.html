@@ -41,13 +41,30 @@ hr { display:none; }
 <header id="title-block-header">
 <h1 class="title">Gneiss Manual</h1>
 </header>
-<h1 id="gneiss-1.0-user-manual">Gneiss 1.0 — User Manual</h1>
-<p>Gneiss is a stereo compressor with three styles (Clean, Classic and
-Opto), a soft knee, left/right or mid/side processing with channel
-linking, an external sidechain with 48 dB/oct detector filters, auto
-gain, parallel mix, A/B comparison, undo/redo and MIDI Learn. It runs as
-VST3, AU, CLAP and VST2 on macOS, Windows and Linux, with no added
-latency.</p>
+<h1 id="gneiss-2.0-user-manual">Gneiss 2.0 — User Manual</h1>
+<p>Gneiss is a stereo compressor. It has:</p>
+<ul>
+<li><strong>Fourteen styles</strong>, including upward compression, a
+combined up-and-down style (TTM) and vari-mu.</li>
+<li><strong>Dynamics controls</strong>: knee up to 72 dB, hold, range, a
+gain-change mix from 0 to 200%, and lookahead up to 20 ms.</li>
+<li><strong>Automatic help</strong>: auto threshold, auto release and
+auto gain.</li>
+<li><strong>Oversampling</strong> up to 32x.</li>
+<li><strong>Analog character</strong>: warm, punchy or vintage, before
+or after the compressor.</li>
+<li><strong>Six stereo modes</strong>, including mid-to-side and
+side-to-mid.</li>
+<li><strong>An external sidechain</strong> with a 6-band sidechain
+EQ.</li>
+<li><strong>Triggering</strong> from MIDI notes or tempo-synced
+pulses.</li>
+<li><strong>Audition</strong> of the trigger and of the gain
+change.</li>
+<li><strong>EBU R128 loudness metering</strong>.</li>
+</ul>
+<p>Gneiss runs as VST3, AU, CLAP and VST2 on macOS, Windows and
+Linux.</p>
 <p><strong>Contents</strong></p>
 <ol type="1">
 <li><a href="#1-installing">Installing</a></li>
@@ -58,19 +75,24 @@ minutes</a></li>
 <li><a href="#5-the-main-controls">The main controls</a></li>
 <li><a href="#6-the-displays-and-meters">The displays and
 meters</a></li>
-<li><a href="#7-expert-stereo-and-sidechain">Expert: stereo and
-sidechain</a></li>
-<li><a href="#8-using-an-external-sidechain-in-your-daw">Using an
+<li><a href="#7-the-stereo-panel">The STEREO panel</a></li>
+<li><a href="#8-the-sidechain-panel">The SIDECHAIN panel</a></li>
+<li><a href="#9-the-trigger-panel">The TRIGGER panel</a></li>
+<li><a href="#10-the-character-panel">The CHARACTER panel</a></li>
+<li><a href="#11-using-an-external-sidechain-in-your-daw">Using an
 external sidechain in your DAW</a></li>
-<li><a href="#9-ab-undo-and-redo">A/B, undo and redo</a></li>
-<li><a href="#10-midi-learn">MIDI Learn</a></li>
-<li><a href="#11-presets">Presets</a></li>
-<li><a href="#12-help-and-hover-tips">Help and hover tips</a></li>
-<li><a href="#13-recipes">Recipes</a></li>
-<li><a href="#14-keyboard-and-mouse-reference">Keyboard and mouse
+<li><a href="#12-latency">Latency</a></li>
+<li><a href="#13-ab-undo-and-redo">A/B, undo and redo</a></li>
+<li><a href="#14-midi-learn">MIDI Learn</a></li>
+<li><a href="#15-presets">Presets</a></li>
+<li><a href="#16-help-and-hover-tips">Help and hover tips</a></li>
+<li><a href="#17-recipes">Recipes</a></li>
+<li><a href="#18-keyboard-and-mouse-reference">Keyboard and mouse
 reference</a></li>
-<li><a href="#15-parameter-reference">Parameter reference</a></li>
-<li><a href="#16-troubleshooting">Troubleshooting</a></li>
+<li><a href="#19-parameter-reference">Parameter reference</a></li>
+<li><a href="#20-compatibility-with-gneiss-1x">Compatibility with Gneiss
+1.x</a></li>
+<li><a href="#21-troubleshooting">Troubleshooting</a></li>
 </ol>
 <hr />
 <h2 id="installing">1. Installing</h2>
@@ -110,11 +132,12 @@ reference</a></li>
 </tr>
 </tbody>
 </table>
-<p><strong>macOS:</strong> the builds are signed ad hoc but not
-notarized. If macOS blocks them, open Terminal and run:</p>
+<p><strong>macOS:</strong> if a build is not notarized and macOS blocks
+it, open Terminal and run:</p>
 <pre><code>xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/*/Gneiss*</code></pre>
-<p>Rescan plugins in your DAW. Gneiss appears under <strong>Epsilon
-Audio</strong> as a dynamics effect.</p>
+<p>Then rescan plugins in your DAW. Gneiss appears under <strong>Epsilon
+Audio</strong> as a dynamics plugin. Gneiss 2.0 replaces 1.x in place:
+your sessions and presets keep working and sound the same (see <a href="#20-compatibility-with-gneiss-1x">section 20</a>).</p>
 <hr />
 <h2 id="a-quick-tour">2. A quick tour</h2>
 <figure>
@@ -124,170 +147,415 @@ Audio</strong> as a dynamics effect.</p>
 <ul>
 <li><strong>Header</strong>: the preset browser, <strong>A / B /
 COPY</strong>, <strong>UNDO / REDO</strong>, <strong>LEARN</strong>,
-<strong>MIDI</strong> and <strong>HELP</strong>.</li>
-<li><strong>Level display</strong> (left): the last few seconds of
-input, output and gain reduction, with the threshold as a dashed
+<strong>MIDI</strong> and <strong>HELP</strong>. The right edge shows
+the latency when lookahead or oversampling adds any.</li>
+<li><strong>Level display</strong> (left): the last few seconds of input
+level, output level and gain reduction. Upward boost shows in green, and
+trigger activity shows along the bottom. The threshold is the dashed
 line.</li>
 <li><strong>Transfer curve</strong> (centre): how input level maps to
 output level.</li>
-<li><strong>Meters</strong> (right): input, gain reduction and
-output.</li>
-<li><strong>Main panel</strong>: style, auto gain and the seven main
-knobs.</li>
-<li><strong>Expert panel</strong>: stereo and sidechain options (turn on
-<strong>EXPERT</strong> to see them).</li>
+<li><strong>Meters</strong> (right): input, gain change and output, plus
+output <strong>loudness</strong> (momentary, short-term, integrated,
+true peak).</li>
+<li><strong>Main panel</strong> (bottom left):
+<ul>
+<li>the fourteen styles</li>
+<li>THRESHOLD, RATIO, ATTACK, RELEASE, GAIN and MIX</li>
+<li>AUTO GAIN, AUTO THRESH and AUTO RELEASE</li>
+<li>KNEE, RANGE, HOLD and LOOKAHEAD</li>
+</ul></li>
+<li><strong>Panels</strong> (bottom right): switch on <strong>SHOW
+PANELS</strong>, then pick <strong>STEREO</strong>,
+<strong>SIDECHAIN</strong>, <strong>TRIGGER</strong> or
+<strong>CHARACTER</strong>. A gold dot on a tab means something on it is
+active.</li>
 </ul>
 <p>Hover over anything for a moment and a tip explains it.</p>
 <hr />
 <h2 id="compression-in-two-minutes">3. Compression in two minutes</h2>
 <p>A compressor turns down whatever is louder than the
-<strong>threshold</strong>. The <strong>ratio</strong> says by how much:
-at 4:1, a signal that goes 8 dB over the threshold comes out only 2 dB
-over it, so the compressor has applied 6 dB of <strong>gain
-reduction</strong>. <strong>Attack</strong> and <strong>release</strong>
-set how quickly that reduction starts and stops. Because the loud parts
-are now quieter, you can raise everything with <strong>make-up
-gain</strong> — the result is more even, denser and often louder.</p>
+<strong>threshold</strong>, and the <strong>ratio</strong> says by how
+much. At 4:1, a signal that goes 8 dB over the threshold comes out only
+2 dB over it: 6 dB of <strong>gain reduction</strong>.
+<strong>Attack</strong> and <strong>release</strong> set how quickly
+that reduction starts and stops. The loud parts are now quieter, so you
+can raise everything with <strong>make-up gain</strong>. The result is
+more even, denser and often louder.</p>
 <p>A good starting routine:</p>
 <ol type="1">
 <li>Pick a <strong>style</strong>.</li>
 <li>Lower the <strong>threshold</strong> until the red gain reduction
 moves by a few dB on the loudest parts.</li>
 <li>Adjust <strong>ratio</strong>: higher for firmer control.</li>
-<li>Shape the feel with <strong>attack</strong> (longer = more punch)
-and <strong>release</strong> (shorter = livelier, longer =
-smoother).</li>
+<li>Shape the feel with <strong>attack</strong> and
+<strong>release</strong>:
+<ul>
+<li>longer attack lets transients through for more punch</li>
+<li>shorter release sounds livelier, longer release smoother</li>
+</ul></li>
 <li>Raise <strong>gain</strong> (or turn on <strong>auto gain</strong>)
-until the level matches the bypassed sound, and compare with
-<strong>A/B</strong>.</li>
+until the level matches the bypassed sound.</li>
+<li>Compare with <strong>A/B</strong>.</li>
 </ol>
 <hr />
 <h2 id="the-styles">4. The styles</h2>
 <table>
 <colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
 </colgroup>
 <thead>
 <tr class="header">
 <th>Style</th>
-<th>How it works</th>
 <th>Character</th>
-<th>Try it on</th>
+<th>Good for</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td><strong>Clean</strong></td>
-<td>Feed-forward: the detector follows the signal’s peaks directly.</td>
-<td>Precise and transparent, attack down to 0.01 ms.</td>
-<td>Peaks, transients, anything that needs control without colour.</td>
+<td>Feed-forward, follows peaks, very fast attack available</td>
+<td>Transparent control, peak taming</td>
 </tr>
 <tr class="even">
 <td><strong>Classic</strong></td>
-<td>Feedback: the detector hears the already-compressed signal, so it
-eases into compression. The release lengthens after sustained
-compression.</td>
-<td>Smooth, musical, “glue”.</td>
-<td>Drum buses, mix buses, guitars.</td>
+<td>Feedback design: eases into compression, release lengthens after
+sustained compression</td>
+<td>Drums, buses</td>
 </tr>
 <tr class="odd">
 <td><strong>Opto</strong></td>
-<td>Detects the average (RMS) level with a wider knee; the release slows
-the harder it works, like an optical cell.</td>
-<td>Slow, gentle, forgiving levelling.</td>
-<td>Vocals, bass, acoustic instruments.</td>
+<td>Averaged detection, wide soft knee, release slows the harder it
+works</td>
+<td>Vocals, bass</td>
+</tr>
+<tr class="even">
+<td><strong>Vocal</strong></td>
+<td>Gentle on quiet words, firmer on loud ones, wide knee</td>
+<td>Lead and spoken vocals</td>
+</tr>
+<tr class="odd">
+<td><strong>Mastering</strong></td>
+<td>Slow averaged detection, soft knee, longer times</td>
+<td>Whole mixes</td>
+</tr>
+<tr class="even">
+<td><strong>Bus</strong></td>
+<td>Feedback design with an adaptive release</td>
+<td>Groups, mix bus glue</td>
+</tr>
+<tr class="odd">
+<td><strong>Punch</strong></td>
+<td>Lets the start of each hit through before clamping down</td>
+<td>Drums, percussion</td>
+</tr>
+<tr class="even">
+<td><strong>Pumping</strong></td>
+<td>Releases at a steady rate, so the level swells back audibly</td>
+<td>Pumping and breathing effects</td>
+</tr>
+<tr class="odd">
+<td><strong>Versatile</strong></td>
+<td>A balanced all-rounder between Clean and Classic</td>
+<td>A good first choice</td>
+</tr>
+<tr class="even">
+<td><strong>Smooth</strong></td>
+<td>Averaged detection, soft knee, gentle timing</td>
+<td>Transparent levelling</td>
+</tr>
+<tr class="odd">
+<td><strong>Upward</strong></td>
+<td>Brings quiet parts up toward the threshold; loud parts
+untouched</td>
+<td>Detail, room sound, sustain</td>
+</tr>
+<tr class="even">
+<td><strong>TTM</strong> (To The Max)</td>
+<td>Compresses loud parts down and brings quiet parts up, fast</td>
+<td>Dense, in-your-face sounds</td>
+</tr>
+<tr class="odd">
+<td><strong>Vari-Mu</strong></td>
+<td>The ratio grows with level: barely compressing just over the
+threshold, firm on peaks</td>
+<td>Warm, gentle bus and bass compression</td>
+</tr>
+<tr class="even">
+<td><strong>El-Op</strong></td>
+<td>Electro-optical: very soft knee, two-stage release that slows after
+sustained compression</td>
+<td>Smooth, natural vocals and instruments</td>
 </tr>
 </tbody>
 </table>
-<p>Classic adds 2 dB and Opto 6 dB to the knee you set, which the
-transfer curve shows.</p>
+<p><strong>Upward</strong> boosts by up to the RANGE setting. With RANGE
+at its maximum, the boost stops at 24 dB. Signals more than 40 dB under
+the threshold are left alone, so noise floors don’t come up.</p>
 <hr />
 <h2 id="the-main-controls">5. The main controls</h2>
-<p><strong>Threshold</strong> (−60 to 0 dB): level where compression
-begins. You can also drag the dashed line in the level display (up/down)
-or drag in the transfer curve (left/right).</p>
-<p><strong>Ratio</strong> (1:1 to 20:1): strength of compression above
-the threshold. 1.5–2:1 is gentle, 3–4:1 is firm, 8:1 and above
-approaches limiting.</p>
-<p><strong>Knee</strong> (0 to 24 dB): 0 is a hard knee (compression
-starts abruptly at the threshold); wider knees ease in below it.</p>
-<p><strong>Attack</strong> (0.01 to 250 ms): time to react once the
-level goes over the threshold. Under 1 ms catches the sharpest peaks;
-10–30 ms lets drum transients through for punch.</p>
-<p><strong>Release</strong> (5 ms to 2.5 s): time to recover after the
-level drops. Short releases sound loud and lively but can pump; long
-ones are smooth. Classic and Opto adapt their release to the
-material.</p>
-<p><strong>Gain</strong> (−12 to +36 dB): make-up gain after
-compression.</p>
-<p><strong>Auto Gain</strong>: adds make-up gain from the threshold and
-ratio (half the gain reduction a full-scale signal would get), so
-changing them doesn’t change the level as much. <strong>Gain</strong>
-adds on top.</p>
-<p><strong>Mix</strong> (0 to 100%): blend of the dry signal with the
-compressed signal. Values in between give parallel (“New York”)
-compression — dense, but with natural transients.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Control</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Threshold</strong></td>
+<td>Where compression starts (−60 to 0 dB). You can also drag in the
+level display or the transfer curve.</td>
+</tr>
+<tr class="even">
+<td><strong>Ratio</strong></td>
+<td>1:1 (no compression) to 100:1. All the way up is
+<strong>Inf:1</strong>: a hard limit at the threshold.</td>
+</tr>
+<tr class="odd">
+<td><strong>Attack</strong></td>
+<td>0.01 to 250 ms.</td>
+</tr>
+<tr class="even">
+<td><strong>Release</strong></td>
+<td>5 ms to 2.5 s. Several styles also adapt it to the material.</td>
+</tr>
+<tr class="odd">
+<td><strong>Gain</strong></td>
+<td>Make-up gain, −12 to +36 dB.</td>
+</tr>
+<tr class="even">
+<td><strong>Mix</strong></td>
+<td>Scales the <strong>gain change</strong> from 0% (none) to 200%
+(double). Everything stays in phase, so it works like parallel
+compression at any setting below 100%, and exaggerates above it.</td>
+</tr>
+<tr class="odd">
+<td><strong>Auto Gain</strong></td>
+<td>Adds make-up gain from the threshold and ratio, so the level doesn’t
+jump as you change them.</td>
+</tr>
+<tr class="even">
+<td><strong>Auto Thresh</strong></td>
+<td>Makes the threshold relative to the material’s level, measured over
+about a second. The compressor then does the same amount of work whether
+the input is loud or quiet. Set the threshold for a typical level of −18
+dBFS. Ideal for dialogue and sources that change level.</td>
+</tr>
+<tr class="odd">
+<td><strong>Auto Release</strong></td>
+<td>Adapts the release: faster after short peaks, slower during
+sustained compression. RELEASE sets the overall speed.</td>
+</tr>
+<tr class="even">
+<td><strong>Knee</strong></td>
+<td>0 (hard) to 72 dB. Very wide knees with a fast attack start to
+saturate.</td>
+</tr>
+<tr class="odd">
+<td><strong>Range</strong></td>
+<td>The most the gain may change, in dB. 60 dB means no limit.</td>
+</tr>
+<tr class="even">
+<td><strong>Hold</strong></td>
+<td>Keeps the gain reduction for up to 500 ms before the release starts.
+Stops fast releases from fluttering on low notes.</td>
+</tr>
+<tr class="odd">
+<td><strong>Lookahead</strong></td>
+<td>Lets the compressor see up to 20 ms ahead, so it is already working
+when a peak arrives. Adds latency (see <a href="#12-latency">section
+12</a>).</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="the-displays-and-meters">6. The displays and meters</h2>
-<p><strong>Level display.</strong> Time runs from left to right over
-about ten seconds. - <strong>Grey area</strong>: input level. -
-<strong>Coloured line</strong>: output level (after gain). - <strong>Red
-area hanging from the top</strong>: gain reduction (0–30 dB over the top
-half). - <strong>Dashed line</strong>: the threshold. Drag anywhere in
-the display to move it.</p>
-<p><strong>Transfer curve.</strong> Input level (horizontal) against
-output level (vertical), before make-up gain. The faint diagonal is “no
-change”. Above the threshold the curve bends by the ratio; the knee
-rounds the corner. The dot shows the current input level on the curve.
-Drag left and right to set the threshold.</p>
-<p><strong>Meters.</strong> IN: input peaks (left, right). GR: gain
-reduction for each channel (or mid and side), hanging down, with the
-current maximum below. OUT: output peaks. Peaks turn red at 0 dBFS.</p>
+<ul>
+<li><strong>Level display</strong>: shows the last few seconds.
+<ul>
+<li>Input level in grey, output level in colour.</li>
+<li>Gain reduction in red, hanging from the top; upward boost in
+green.</li>
+<li>Gold marks along the bottom while a MIDI note or a tempo pulse is
+triggering.</li>
+<li>Drag up and down to move the threshold. With AUTO THRESH on, the
+label says “(auto)”.</li>
+</ul></li>
+<li><strong>Transfer curve</strong>: input level (horizontal) against
+output level (vertical), before make-up gain, for the current style,
+knee, range and mix. The dot is the current input level. Drag left and
+right to move the threshold.</li>
+<li><strong>Meters</strong>: input peaks, gain change and output peaks.
+The gain change is red when reducing and green when boosting.</li>
+<li><strong>Loudness</strong> (EBU R128 / ITU-R BS.1770), measured at
+the output. Click the readout to reset I and TP.
+<ul>
+<li><strong>M</strong>: momentary loudness (400 ms).</li>
+<li><strong>S</strong>: short-term loudness (3 s).</li>
+<li><strong>I</strong>: integrated loudness since the last reset, gated
+as the standard describes.</li>
+<li><strong>TP</strong>: the highest true peak since the last reset, 4x
+oversampled.</li>
+</ul></li>
+</ul>
 <hr />
-<h2 id="expert-stereo-and-sidechain">7. Expert: stereo and
-sidechain</h2>
-<p>Turn on <strong>EXPERT</strong> to show these options. With Expert
-off, the panel summarises the current settings.</p>
-<p><strong>Channels: L/R or M/S.</strong> In <strong>L/R</strong> the
-two channels are left and right. In <strong>M/S</strong> Gneiss
-compresses the <strong>mid</strong> (what is common to both sides —
-usually vocals, kick, bass) and the <strong>side</strong> (the stereo
-difference — reverb, wide synths, room) separately. The gain reduction
-meters then show mid and side.</p>
-<p><strong>Link</strong> (0–100%): how much the two channels share one
-gain reduction. - <strong>100%</strong>: both get the same reduction, so
-the stereo image never shifts. - <strong>0%</strong>: each compresses on
-its own — useful in M/S to treat mid and side independently.</p>
-<p><strong>Sidechain: Internal or External.</strong> Internal listens to
-the audio being compressed. External listens to the sidechain input
-instead (see section 8). If External is selected but nothing is routed
-to the sidechain, the compressor hears silence and does nothing.</p>
-<p><strong>SC High Pass / SC Low Pass</strong> (48 dB/oct, 20 Hz–20
-kHz): filter the detector signal only — the audio is not filtered. - A
-high pass at 80–150 Hz stops the kick and bass from pumping a whole mix.
-- A high pass at 4–7 kHz makes Gneiss react mainly to sibilance (a
-simple de-esser, see Recipes).</p>
-<p><strong>Listen</strong>: hear the detector signal after the filters
-instead of the output, to tune them. The status line turns red while
-Listen is on; remember to switch it off.</p>
+<h2 id="the-stereo-panel">7. The STEREO panel</h2>
+<ul>
+<li><p><strong>CHANNELS</strong>:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Mode</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>L / R</strong></td>
+<td>Left and right are compressed (linked by LINK).</td>
+</tr>
+<tr class="even">
+<td><strong>M / S</strong></td>
+<td>Mid (centre) and side (stereo) are compressed instead.</td>
+</tr>
+<tr class="odd">
+<td><strong>MID</strong></td>
+<td>Only the mid is compressed; the side passes untouched.</td>
+</tr>
+<tr class="even">
+<td><strong>SIDE</strong></td>
+<td>Only the side is compressed.</td>
+</tr>
+<tr class="odd">
+<td><strong>MID &gt; SIDE</strong></td>
+<td>The mid’s level compresses the side. For example, the stereo bed
+ducks when the centre (a vocal) is loud.</td>
+</tr>
+<tr class="even">
+<td><strong>SIDE &gt; MID</strong></td>
+<td>The side’s level compresses the mid.</td>
+</tr>
+</tbody>
+</table></li>
+<li><p><strong>LINK</strong>: how much the two channels share one gain
+reduction. It applies to L/R and M/S.</p></li>
+<li><p><strong>OVERSAMPLING</strong>: OFF, 2x, 4x, 8x, 16x or 32x. Runs
+the gain stage and the character stage at that multiple of the sample
+rate, using linear-phase filters. Use it with fast attacks, heavy
+character or limiting, to avoid aliasing. It costs latency and CPU; 32x
+is the heaviest setting.</p></li>
+<li><p><strong>DRY/WET</strong>: blends the dry signal back in, for
+classic parallel compression. It is the 1.x Mix control.</p></li>
+</ul>
 <hr />
-<h2 id="using-an-external-sidechain-in-your-daw">8. Using an external
+<h2 id="the-sidechain-panel">8. The SIDECHAIN panel</h2>
+<p>The sidechain is what the compressor <em>listens to</em>. You never
+hear it, unless you audition it.</p>
+<ul>
+<li><strong>INTERNAL / EXTERNAL</strong>: listen to the input, or to the
+sidechain input (see <a href="#11-using-an-external-sidechain-in-your-daw">section 11</a>).</li>
+<li><strong>SC EQ</strong>: switches the sidechain EQ on or off.</li>
+<li><strong>SIDECHAIN EQ display</strong>: up to <strong>6
+bands</strong> with all of Mica’s shapes:
+<ul>
+<li>bell, shelves, cuts, notch, band pass, tilt shelf, flat tilt, all
+pass</li>
+<li>slopes up to 96 dB/oct, and brickwall cuts</li>
+</ul>
+Editing bands:
+<ul>
+<li>Double-click to add a band.</li>
+<li>Drag a dot to set its frequency and gain (or its Q, for shapes
+without gain). The mouse wheel changes Q.</li>
+<li>Alt-click switches a band off; right-click (or Delete) removes
+it.</li>
+</ul>
+Click a dot to select it. The selected band’s <strong>shape</strong>,
+<strong>slope</strong> and <strong>channel</strong> steppers sit below
+the display. The channel can be the whole sidechain (STEREO), or only
+its mid or side. The gold line shows the total sidechain response,
+including the 48 dB filters.</li>
+<li><strong>HP 48 / LP 48</strong>: the 1.x 48 dB/oct sidechain high
+pass and low pass, with their frequencies.</li>
+<li><strong>AUDITION</strong>: hear what the compressor listens to,
+after the sidechain EQ and filters, instead of the output.</li>
+<li><strong>GAIN CHANGE</strong>: hear only what the compressor takes
+away. A quick way to hear where and how much it works.</li>
+</ul>
+<p>When either audition is on, the status line in the level display
+turns red.</p>
+<hr />
+<h2 id="the-trigger-panel">9. The TRIGGER panel</h2>
+<p>Triggers drive the compressor without any audio. They add to the
+audio trigger: whichever is louder wins.</p>
+<ul>
+<li><strong>MIDI NOTES</strong>: while a MIDI note is held, the
+compressor acts as if the key were at the note’s velocity (127 = 0
+dBFS). Route a MIDI track to Gneiss in your DAW.</li>
+<li><strong>TEMPO PULSE</strong>: a pulse in time with your song, which
+you can use for classic sidechain pumping without a kick track.
+<ul>
+<li><strong>SYNC</strong> sets how often it repeats: 1/1 to 1/32, dotted
+and triplet values.</li>
+<li><strong>OFFSET</strong> moves the pulse later within each period,
+for example 50% for off-beats.</li>
+<li><strong>LENGTH</strong> sets how long it lasts.</li>
+</ul>
+The pulse follows your host’s tempo and position. When the transport is
+stopped, it free-runs at the host tempo.</li>
+</ul>
+<p>The <strong>TRIGGER</strong> lamp, and the gold marks in the level
+display, light while a trigger is active.</p>
+<hr />
+<h2 id="the-character-panel">10. The CHARACTER panel</h2>
+<ul>
+<li><strong>CHARACTER</strong>:
+<ul>
+<li><strong>OFF</strong>: perfectly clean.</li>
+<li><strong>WARM</strong>: tube-like saturation with mostly even
+harmonics.</li>
+<li><strong>PUNCHY</strong>: rounds off peaks with odd harmonics.</li>
+<li><strong>VINTAGE</strong>: warm saturation, a little low-end weight,
+a softened top, and slow analog drift. The colour and threshold wander
+very slightly.</li>
+</ul></li>
+<li><strong>DRIVE</strong>: how hard the stage is pushed. Small signals
+keep their level, so drive changes the colour, not the loudness.</li>
+<li><strong>POSITION</strong>:
+<ul>
+<li><strong>POST</strong> colours the compressed signal.</li>
+<li><strong>PRE</strong> colours the input, and the compressor then
+tames the extra harmonics.</li>
+</ul></li>
+</ul>
+<p>The character stage runs inside the oversampling, so use oversampling
+for heavy drive.</p>
+<hr />
+<h2 id="using-an-external-sidechain-in-your-daw">11. Using an external
 sidechain in your DAW</h2>
 <p>Gneiss has a stereo sidechain input in VST3, AU and CLAP. To use
 it:</p>
 <ol type="1">
 <li>Put Gneiss on the track you want to duck or control (for example a
 bass or pad).</li>
-<li>In Gneiss, turn on <strong>EXPERT</strong> and select
-<strong>EXTERNAL</strong>.</li>
+<li>In Gneiss, switch on <strong>SHOW PANELS</strong>, open
+<strong>SIDECHAIN</strong> and select <strong>EXTERNAL</strong>.</li>
 <li>Route the trigger (for example a kick drum) to Gneiss’s sidechain:
 <ul>
 <li><strong>Ableton Live</strong>: in Gneiss’s device, open the
-sidechain section or choose the kick track as Audio From in the plugin’s
-input chooser.</li>
+sidechain section, or choose the kick track as Audio From in the
+plugin’s input chooser.</li>
 <li><strong>Logic Pro</strong>: choose the trigger track in the plugin
 window’s <strong>Side Chain</strong> menu.</li>
 <li><strong>Bitwig</strong>: use the plugin’s sidechain input
@@ -297,40 +565,67 @@ the Gneiss track and enable them as the plugin’s sidechain pins.</li>
 <li><strong>Cubase / Studio One</strong>: activate the plugin’s
 sidechain and add a send from the trigger track to it.</li>
 </ul></li>
-<li>Lower the threshold until the bass ducks on each kick; set release
-to taste (100–300 ms for classic pumping).</li>
+<li>Lower the threshold until the bass ducks on each kick, and set the
+release to taste (100–300 ms for classic pumping).</li>
 </ol>
+<p>The sidechain EQ works on the external signal too.</p>
 <hr />
-<h2 id="ab-undo-and-redo">9. A/B, undo and redo</h2>
-<p><strong>A/B</strong>: Gneiss holds two complete settings. Click
-<strong>B</strong> to switch to it — the first time, B starts as a copy
-of A. Click <strong>A</strong> to go back. Each slot keeps its own
-changes, so you can tweak both and compare by ear. <strong>COPY</strong>
+<h2 id="latency">12. Latency</h2>
+<p>Gneiss adds no latency unless you use lookahead or oversampling:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>Latency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Lookahead</td>
+<td>as set (up to 20 ms)</td>
+</tr>
+<tr class="even">
+<td>Oversampling 2x / 4x / 8x / 16x / 32x</td>
+<td>32 / 48 / 56 / 60 / 62 samples</td>
+</tr>
+</tbody>
+</table>
+<p>The header shows the total, and Gneiss reports it to your host, which
+compensates automatically. When you change lookahead or oversampling
+while playing, some hosts only apply the new latency after playback
+stops.</p>
+<hr />
+<h2 id="ab-undo-and-redo">13. A/B, undo and redo</h2>
+<p><strong>A/B</strong>: Gneiss holds two complete settings. - Click
+<strong>B</strong> to switch to it; the first time, B starts as a copy
+of A. - Click <strong>A</strong> to go back. - <strong>COPY</strong>
 copies the current slot into the other one.</p>
-<p><strong>Undo / redo</strong>: every edit made in Gneiss’s window is
-one step — a knob drag, a button, a typed value, a preset load or an A/B
-switch. Use the header buttons (hover them to see how many steps are
-available) or <strong>Cmd/Ctrl-Z</strong> and
-<strong>Cmd/Ctrl-Shift-Z</strong> (or <strong>Cmd/Ctrl-Y</strong>).
-Changes from host automation or MIDI are not undo steps.</p>
+<p><strong>Undo / redo</strong>: every edit made in Gneiss’s window
+counts as one step. That includes knobs, buttons, styles, sidechain EQ
+bands, preset loads and A/B switches. Use the header buttons, or
+<strong>Cmd/Ctrl-Z</strong> and <strong>Cmd/Ctrl-Shift-Z</strong> (or
+<strong>Cmd/Ctrl-Y</strong>).</p>
 <hr />
-<h2 id="midi-learn">10. MIDI Learn</h2>
+<h2 id="midi-learn">14. MIDI Learn</h2>
 <ol type="1">
 <li>Route a MIDI track or controller to Gneiss in your DAW.</li>
 <li>Click <strong>LEARN</strong>.</li>
-<li>Click the control you want to play.</li>
+<li>Click a control.</li>
 <li>Move a knob or fader on your controller. The control shows its
 <strong>CC</strong> number.</li>
-<li>Click <strong>LEARN</strong> again (or press Esc) when you are
-done.</li>
+<li>Click <strong>LEARN</strong> again, or press Esc.</li>
 </ol>
-<p>Right-click a control in Learn mode to unassign it; <strong>CLEAR ALL
-ASSIGNMENTS</strong> (bottom right of the level display) removes them
-all. Assignments are saved with your project. The <strong>MIDI</strong>
-button turns MIDI control off without forgetting them.</p>
+<p>To remove assignments, right-click a control in Learn mode, or use
+<strong>CLEAR ALL ASSIGNMENTS</strong>. Assignments are saved with your
+project.</p>
+<p>The <strong>MIDI</strong> button in the header switches MIDI control
+and MIDI triggering on or off together.</p>
 <hr />
-<h2 id="presets">11. Presets</h2>
-<p>Click the preset name to open the browser.</p>
+<h2 id="presets">15. Presets</h2>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -345,37 +640,38 @@ button turns MIDI control off without forgetting them.</p>
 <tbody>
 <tr class="odd">
 <td><strong>Vocals</strong></td>
-<td>Gentle, present, levelling, aggressive, sibilance tamer, rap</td>
+<td>Gentle, present, leveller, aggressive, sibilance tamer, rap; Vocal
+Rider, El-Op Vocal, De-Ess (SC EQ)</td>
 </tr>
 <tr class="even">
 <td><strong>Drums</strong></td>
-<td>Kick punch, snare snap, drum bus, smash, parallel, room pump</td>
+<td>Kick punch, snare snap, drum bus, smash, parallel drums, room pump;
+Punch Drums, To The Max, Upward Detail</td>
 </tr>
 <tr class="odd">
 <td><strong>Bass &amp; Keys</strong></td>
-<td>Even and tight bass, synth bass, piano, guitar sustain,
-acoustic</td>
+<td>Even and tight bass, synth bass, smooth piano, guitar sustain,
+acoustic; Vari-Mu Bass, Smooth Keys</td>
 </tr>
 <tr class="even">
 <td><strong>Bus &amp; Master</strong></td>
 <td>Glue, gentle mix bus, master leveller, wide bus, mid/side control,
-low-end glue</td>
+low-end glue; Bus Glue 2, Mastering Glue, Peak Limiter, Tape Bus</td>
 </tr>
 <tr class="odd">
 <td><strong>Creative</strong></td>
-<td>Sidechain duck, kick pump, New York, squash, sustainer, lo-fi
-crush</td>
+<td>Sidechain duck, kick pump, New York, squash, sustainer, lo-fi crush;
+Dialog Leveler, Tempo Pump, MIDI Pump</td>
 </tr>
 </tbody>
 </table>
-<p>The <em>Sidechain Duck</em> and <em>Kick Pump</em> presets use the
-external sidechain: route a trigger to Gneiss (section 8).</p>
 <ul>
-<li>The arrows (or the mouse wheel over the name) step through
-presets.</li>
-<li>A <strong>*</strong> after the name means you have changed it.</li>
-<li><strong>SAVE CURRENT AS…</strong> saves your own preset; right-click
-a user preset, then click again, to delete it.</li>
+<li>The 2.0 presets come after the 1.x ones, so 1.x program numbers stay
+the same.</li>
+<li>A <strong>*</strong> after the preset name means you have changed
+it.</li>
+<li><strong>SAVE CURRENT AS…</strong> stores your own preset.</li>
+<li>To delete a user preset, right-click it, then click it again.</li>
 </ul>
 <table>
 <thead>
@@ -400,40 +696,55 @@ a user preset, then click again, to delete it.</li>
 </tbody>
 </table>
 <hr />
-<h2 id="help-and-hover-tips">12. Help and hover tips</h2>
+<h2 id="help-and-hover-tips">16. Help and hover tips</h2>
 <ul>
-<li><strong>Hover tips</strong>: rest the pointer on any control,
-display, meter or header button and a tip explains it, with the current
-value and any MIDI CC.</li>
+<li><strong>Hover tips</strong>: rest the pointer on anything for a
+moment and a tip explains it, with its current value and any MIDI CC
+assigned to it. Each style has its own tip.</li>
 <li><strong>HELP</strong> opens short help pages. The <strong>HOVER
-TIPS</strong> switch turns tips on or off; <strong>FULL MANUAL
+TIPS</strong> switch turns tips on or off, and <strong>FULL MANUAL
 (WEB)</strong> opens this manual.</li>
 </ul>
 <hr />
-<h2 id="recipes">13. Recipes</h2>
-<p><strong>Vocal leveller.</strong> Opto, ratio 3:1, knee 12+ dB, attack
-20–30 ms, release 400–600 ms. Lower the threshold until the meter shows
-3–6 dB of reduction on loud phrases; add gain to match.</p>
-<p><strong>Punchy drums.</strong> Clean, ratio 4:1, attack 20–30 ms
-(transients get through), release 60–100 ms. 4–8 dB of reduction.</p>
-<p><strong>Mix bus glue.</strong> Classic, ratio 2:1, attack 30 ms,
-release 150–250 ms, SC high pass at 100 Hz. Aim for 1–3 dB of
-reduction.</p>
-<p><strong>New York (parallel) compression.</strong> Clean, ratio 10:1,
-threshold low, attack under 1 ms, release 100 ms, lots of gain, then Mix
-around 30–40%.</p>
+<h2 id="recipes">17. Recipes</h2>
+<p><strong>Vocal leveller.</strong> Vocal or Opto style, ratio 3:1,
+attack 10–20 ms, release 200–400 ms with AUTO RELEASE. Aim for 3–6 dB of
+reduction on loud phrases.</p>
+<p><strong>Dialogue that changes level.</strong> Versatile, ratio 3:1,
+AUTO THRESH and AUTO RELEASE on, threshold −24 dB. The amount of
+compression stays steady as the speaker moves closer or further
+away.</p>
+<p><strong>Punchy drums.</strong> Punch style, ratio 4:1, attack 10–20
+ms, release 60–100 ms, 4–8 dB of reduction.</p>
+<p><strong>Mix bus glue.</strong> Bus style, ratio 2:1, attack 30 ms,
+release 150–250 ms. Add a low cut at 90 Hz in the sidechain EQ, and aim
+for 1–3 dB of reduction.</p>
+<p><strong>Peak limiter.</strong> Clean, ratio Inf:1, attack 0.05 ms,
+LOOKAHEAD 5 ms, HOLD 5 ms, oversampling 8x.</p>
+<p><strong>Parallel compression.</strong> Any style, heavy settings,
+then <strong>MIX</strong> at 30–50%. The gain change is scaled, and
+everything stays in phase.</p>
 <p><strong>Sidechain ducking.</strong> Clean, ratio 6:1, attack 1 ms,
-release 150–250 ms, Expert → External, kick routed to the sidechain
-(section 8).</p>
-<p><strong>Simple de-esser.</strong> Clean, ratio 6:1, attack 0.5 ms,
-release 40 ms, SC high pass at 5–7 kHz. Use Listen to find the harshest
-band, then lower the threshold until only the “s” sounds trigger it.</p>
-<p><strong>Mid/side bus control.</strong> M/S, link 0%, ratio 3:1: the
-side channel can be held in check without touching the centre.</p>
+release 150–250 ms, EXTERNAL, kick routed to the sidechain (<a href="#11-using-an-external-sidechain-in-your-daw">section 11</a>).</p>
+<p><strong>Tempo pumping with no kick.</strong> Pumping style, TEMPO
+PULSE on, SYNC 1/4, LENGTH 20%, threshold −12 dB, ratio 6:1.</p>
+<p><strong>De-esser.</strong> Clean, ratio 6:1, attack 0.5 ms, release
+40 ms. 1. In the sidechain EQ, add a low cut at 4 kHz and a bell boost
+around the harshest frequency (5–8 kHz). 2. Use AUDITION to find it. 3.
+Lower the threshold until only the “s” sounds trigger it.</p>
+<p><strong>Upward compression for detail.</strong> Upward style, ratio
+2:1, threshold a little under the average level, RANGE 6–9 dB. Quiet
+details and room tone come up.</p>
+<p><strong>Warm bus.</strong> Vari-Mu or Bus style with WARM or VINTAGE
+character at 30–50% drive, oversampling 4x.</p>
 <hr />
-<h2 id="keyboard-and-mouse-reference">14. Keyboard and mouse
+<h2 id="keyboard-and-mouse-reference">18. Keyboard and mouse
 reference</h2>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Action</th>
@@ -442,32 +753,49 @@ reference</h2>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Drag knob middle up/down</td>
+<td>Drag a knob’s middle</td>
 <td>Adjust (Shift = fine)</td>
 </tr>
 <tr class="even">
-<td>Grab knob rim and turn</td>
-<td>Set by angle</td>
+<td>Grab a large knob’s rim</td>
+<td>Turn in a circle</td>
 </tr>
 <tr class="odd">
-<td>Double-click knob</td>
-<td>Type a value</td>
+<td>Double-click a knob</td>
+<td>Type a value (<code>-24</code>, <code>4</code>, <code>inf</code>,
+<code>150</code>, <code>1.5s</code>)</td>
 </tr>
 <tr class="even">
-<td>Cmd/Ctrl-click knob</td>
-<td>Reset to default</td>
+<td>Cmd/Ctrl-click a knob</td>
+<td>Reset</td>
 </tr>
 <tr class="odd">
-<td>Mouse wheel on knob</td>
-<td>Small steps (Shift = smaller)</td>
+<td>Mouse wheel over a knob</td>
+<td>Small steps (Shift = finer)</td>
 </tr>
 <tr class="even">
-<td>Drag in level display</td>
-<td>Set threshold (vertical)</td>
+<td>Drag in the level display / transfer curve</td>
+<td>Threshold</td>
 </tr>
 <tr class="odd">
-<td>Drag in transfer curve</td>
-<td>Set threshold (horizontal)</td>
+<td>Double-click the sidechain EQ</td>
+<td>Add a band</td>
+</tr>
+<tr class="even">
+<td>Drag a sidechain EQ dot</td>
+<td>Frequency and gain (Shift = fine)</td>
+</tr>
+<tr class="odd">
+<td>Mouse wheel over a sidechain EQ dot</td>
+<td>Q</td>
+</tr>
+<tr class="even">
+<td>Alt-click / right-click a sidechain EQ dot</td>
+<td>Switch off / remove</td>
+</tr>
+<tr class="odd">
+<td>Click the loudness readout</td>
+<td>Reset integrated loudness and true peak</td>
 </tr>
 <tr class="even">
 <td>Cmd/Ctrl-Z</td>
@@ -482,18 +810,19 @@ reference</h2>
 <td>Previous / next preset</td>
 </tr>
 <tr class="odd">
-<td>Right-click (Learn mode)</td>
-<td>Remove MIDI assignment</td>
-</tr>
-<tr class="even">
 <td>Esc</td>
 <td>Leave Learn mode, close Help, cancel typing</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="parameter-reference">15. Parameter reference</h2>
+<h2 id="parameter-reference">19. Parameter reference</h2>
 <table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Parameter</th>
@@ -504,7 +833,8 @@ reference</h2>
 <tbody>
 <tr class="odd">
 <td>Style</td>
-<td>Clean, Classic, Opto</td>
+<td>Clean, Classic, Opto, Vocal, Mastering, Bus, Punch, Pumping,
+Versatile, Smooth, Upward, TTM, Vari-Mu, El-Op</td>
 <td>Clean</td>
 </tr>
 <tr class="even">
@@ -514,12 +844,12 @@ reference</h2>
 </tr>
 <tr class="odd">
 <td>Ratio</td>
-<td>1:1 – 20:1</td>
+<td>1:1 – 100:1 (top = Inf:1)</td>
 <td>4:1</td>
 </tr>
 <tr class="even">
 <td>Knee</td>
-<td>0 – 24 dB</td>
+<td>0 – 72 dB</td>
 <td>6 dB</td>
 </tr>
 <tr class="odd">
@@ -543,19 +873,20 @@ reference</h2>
 <td>Off</td>
 </tr>
 <tr class="odd">
-<td>Mix</td>
-<td>0 – 100%</td>
-<td>100%</td>
+<td>Mix (dry/wet)</td>
+<td>0 – 100 %</td>
+<td>100 %</td>
 </tr>
 <tr class="even">
 <td>Channel Mode</td>
-<td>Left/Right, Mid/Side</td>
+<td>Left/Right, Mid/Side, Mid Only, Side Only, Mid to Side, Side to
+Mid</td>
 <td>Left/Right</td>
 </tr>
 <tr class="odd">
 <td>Stereo Link</td>
-<td>0 – 100%</td>
-<td>100%</td>
+<td>0 – 100 %</td>
+<td>100 %</td>
 </tr>
 <tr class="even">
 <td>Sidechain</td>
@@ -564,49 +895,152 @@ reference</h2>
 </tr>
 <tr class="odd">
 <td>Sidechain High Pass / Low Pass</td>
-<td>Off, On</td>
-<td>Off</td>
+<td>Off, On; 20 Hz – 20 kHz</td>
+<td>Off; 80 Hz / 8 kHz</td>
 </tr>
 <tr class="even">
-<td>Sidechain HP / LP Freq</td>
-<td>20 Hz – 20 kHz</td>
-<td>80 Hz / 8 kHz</td>
-</tr>
-<tr class="odd">
-<td>Sidechain Listen</td>
-<td>Off, On</td>
-<td>Off</td>
-</tr>
-<tr class="even">
-<td>Expert Mode</td>
+<td>Sidechain Listen (audition trigger)</td>
 <td>Off, On</td>
 <td>Off</td>
 </tr>
 <tr class="odd">
+<td>Hold</td>
+<td>0 – 500 ms</td>
+<td>0 ms</td>
+</tr>
+<tr class="even">
+<td>Range</td>
+<td>0 – 60 dB (60 = no limit)</td>
+<td>60 dB</td>
+</tr>
+<tr class="odd">
+<td>Gain Change Mix</td>
+<td>0 – 200 %</td>
+<td>100 %</td>
+</tr>
+<tr class="even">
+<td>Lookahead</td>
+<td>0 – 20 ms</td>
+<td>0 ms</td>
+</tr>
+<tr class="odd">
+<td>Oversampling</td>
+<td>Off, 2x, 4x, 8x, 16x, 32x</td>
+<td>Off</td>
+</tr>
+<tr class="even">
+<td>Auto Threshold, Auto Release</td>
+<td>Off, On</td>
+<td>Off</td>
+</tr>
+<tr class="odd">
+<td>Character</td>
+<td>Off, Warm, Punchy, Vintage</td>
+<td>Off</td>
+</tr>
+<tr class="even">
+<td>Drive</td>
+<td>0 – 100 %</td>
+<td>30 %</td>
+</tr>
+<tr class="odd">
+<td>Character Position</td>
+<td>Post, Pre</td>
+<td>Post</td>
+</tr>
+<tr class="even">
+<td>MIDI Trigger, Pulse Trigger</td>
+<td>Off, On</td>
+<td>Off</td>
+</tr>
+<tr class="odd">
+<td>Pulse Sync</td>
+<td>1/1, 1/2, 1/4, 1/8, 1/16, 1/32, 1/4 and 1/8 dotted, 1/4 and 1/8
+triplet</td>
+<td>1/4</td>
+</tr>
+<tr class="even">
+<td>Pulse Offset / Length</td>
+<td>0 – 100 %</td>
+<td>0 % / 25 %</td>
+</tr>
+<tr class="odd">
+<td>Audition Gain Change</td>
+<td>Off, On</td>
+<td>Off</td>
+</tr>
+<tr class="even">
+<td>Sidechain EQ</td>
+<td>Off, On</td>
+<td>On (no bands)</td>
+</tr>
+<tr class="odd">
+<td>SC EQ n Used / Enabled / Shape / Frequency / Gain / Q / Slope /
+Channel</td>
+<td>as Mica’s bands; channel Stereo, Mid, Side</td>
+<td>—</td>
+</tr>
+<tr class="even">
 <td>MIDI</td>
 <td>Off, On</td>
 <td>On</td>
 </tr>
 </tbody>
 </table>
-<p>Gneiss also reports its input, output and gain reduction levels to
-the host as read-only output parameters.</p>
+<p>The meters (input, output, gain change, loudness, trigger) are output
+parameters, so hosts can display them.</p>
 <hr />
-<h2 id="troubleshooting">16. Troubleshooting</h2>
+<h2 id="compatibility-with-gneiss-1.x">20. Compatibility with Gneiss
+1.x</h2>
+<p>Gneiss 2.0 is the same plugin (same IDs), version 2.0.</p>
+<ul>
+<li><strong>Sessions load and sound the same.</strong> Every 1.x
+parameter keeps its number and meaning. The 2.0 parameters come after
+them, with defaults that change nothing: no hold, range at no limit,
+100% gain-change mix, no lookahead, no oversampling, character off. An
+automated test plays random 1.x settings through a frozen copy of the
+1.0.1 engine and through 2.0. The outputs are identical.</li>
+<li><strong>Ranges that grew:</strong>
+<ul>
+<li>Ratio now goes to 100:1 (Inf:1) instead of 20:1.</li>
+<li>Knee goes to 72 dB instead of 24.</li>
+<li>Channel mode has four more modes.</li>
+</ul>
+Stored values keep their meaning. Hosts that store automation as a 0–1
+position along a control’s range may map existing automation lanes for
+these three controls differently, so check them after upgrading.</li>
+<li><strong>Factory presets</strong> keep their program numbers; the
+fifteen 2.0 presets come after them.</li>
+<li><strong>User presets</strong> and <strong>MIDI Learn</strong>
+assignments carry over.</li>
+<li><strong>The EXPERT switch</strong> is now <strong>SHOW
+PANELS</strong>.</li>
+<li><strong>The window</strong> is larger by default (1180 × 760) and
+still resizes freely.</li>
+</ul>
+<hr />
+<h2 id="troubleshooting">21. Troubleshooting</h2>
 <p><strong>Nothing happens with External sidechain.</strong> The
-sidechain input is empty: route a trigger to it (section 8), or switch
-back to Internal.</p>
-<p><strong>I hear a thin, filtered sound.</strong> Listen is on (the
-status line is red). Switch it off in the Expert panel.</p>
+sidechain input is empty. Route a trigger to it (<a href="#11-using-an-external-sidechain-in-your-daw">section 11</a>), or
+switch back to Internal.</p>
+<p><strong>I hear a thin, filtered sound, or only clicks and
+breaths.</strong> An audition is on: AUDITION (what the compressor
+hears) or GAIN CHANGE (what it removes). The status line turns red when
+one is on. Switch it off in the SIDECHAIN panel.</p>
+<p><strong>The tempo pulse doesn’t line up with the beat.</strong> Use
+OFFSET to move it. Some hosts only report their position while playing;
+when stopped, the pulse free-runs.</p>
+<p><strong>My DAW shows extra delay.</strong> Lookahead and oversampling
+add latency (<a href="#12-latency">section 12</a>), which hosts
+compensate. For live monitoring, set both to zero.</p>
+<p><strong>High CPU.</strong> Oversampling at 16x or 32x with character
+is the heaviest combination. 4x is usually enough.</p>
 <p><strong>Cmd/Ctrl-Z undoes something in my DAW.</strong> The host
 keeps the shortcut; use the UNDO / REDO buttons.</p>
 <p><strong>The plugin doesn’t appear.</strong> Check the install folders
-and rescan; on macOS run the <code>xattr</code> command from section 1.
+and rescan. On macOS, run the <code>xattr</code> command from section 1.
 Logic needs the <code>.component</code> file.</p>
 <hr />
-<p>Gneiss is free software under the MIT license. “FabFilter” and
-“Pro-C” are trademarks of FabFilter Software Instruments; Gneiss is an
-independent design and is not affiliated with or endorsed by
-FabFilter.</p>
+<p>Gneiss is free software under the MIT license.</p>
 </body>
 </html>

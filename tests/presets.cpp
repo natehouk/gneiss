@@ -18,7 +18,7 @@ int main() {
     for (uint32_t p = 0; p < kNumPresets; ++p) {
         Engine e; e.setSampleRate(SR); for (uint32_t k = 0; k < kParamCount; ++k) e.p[k] = presets()[p].v[k]; e.reset();
         std::vector<float> L(N), R(N); float grMax = 0;
-        for (int i = 0; i < N; i += 512) { const int n = std::min(512, N - i); e.process(x.data() + i, x.data() + i, kick.data() + i, kick.data() + i, L.data() + i, R.data() + i, n); grMax = std::max(grMax, e.meterGr(0)); }
+        for (int i = 0; i < N; i += 512) { const int n = std::min(512, N - i); e.process(x.data() + i, x.data() + i, kick.data() + i, kick.data() + i, L.data() + i, R.data() + i, n); grMax = std::max(grMax, std::fabs(e.meterGr(0))); /* upward styles boost */ }
         double s = 0; bool nf = false; for (int i = 0; i < N; ++i) { s += L[i] * L[i]; nf |= !std::isfinite(L[i]); }
         const float rel = 20 * std::log10(std::sqrt(s / N) / inR + 1e-9f);
         const bool ok = !nf && rel > -9 && rel < 12 && (p == 0 || grMax > 1.f); bad += !ok;

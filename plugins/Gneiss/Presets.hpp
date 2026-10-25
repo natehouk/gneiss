@@ -52,6 +52,24 @@ static const PV newYork[]     = { C(0,-36,10,2,0.5f,100,12), {kMix,.35f}, END };
 static const PV squash[]      = { C(2,-45,20,6,10,800,20), END };
 static const PV sustainer[]   = { C(2,-50,8,12,5,1500,22), END };
 static const PV lofi[]        = { C(0,-38,20,0,0.05f,15,16), END };
+// ---------------------------------------------------------------- 2.0 (appended: program numbers of the 1.x presets stay the same)
+#define SCB(n, sh, f, g, q, sl) {sp(n,kSbUsed),1},{sp(n,kSbOn),1},{sp(n,kSbShape),sh},{sp(n,kSbFreq),f},{sp(n,kSbGain),g},{sp(n,kSbQ),q},{sp(n,kSbSlope),sl}
+static const PV vocalRider[]  = { C(kVocal,-26,4,6,8,180,4), {kAutoRelease,1}, END };
+static const PV elOpVocal[]   = { C(kElOp,-24,3,6,10,300,4), {kCharacter,1},{kDrive,20}, END };
+static const PV deEssEq[]     = { C(kClean,-24,6,4,0.5f,50,0), SCB(0, eq::kLowCut, 4000, 0, 0.707f, 3), SCB(1, eq::kBell, 7000, 6, 2.f, 1), {kExpert,1}, END };
+static const PV punchDrums[]  = { C(kPunch,-22,4,4,12,90,3), END };
+static const PV ttmDrums[]    = { C(kTTM,-24,6,6,2,60,0), {kGrMix,70}, END };
+static const PV upwardDetail[]= { C(kUpward,-14,2,6,5,150,-2), {kRange,9}, END };
+static const PV variMuBass[]  = { C(kVariMu,-26,6,6,20,250,3), {kCharacter,1},{kDrive,35}, END };
+static const PV smoothKeys[]  = { C(kSmooth,-26,3,6,15,300,3), {kAutoRelease,1}, END };
+static const PV busGlue[]     = { C(kBus,-18,2,6,30,200,1.5f), {kAutoRelease,1}, SCB(0, eq::kLowCut, 90, 0, 0.707f, 2), {kExpert,1}, END };
+static const PV masterGlue[]  = { C(kMastering,-14,1.5f,12,30,300,1), {kLookahead,2},{kOversampling,2}, END };
+static const PV peakLimit[]   = { C(kClean,-6,100,0,0.05f,60,4), {kLookahead,5},{kOversampling,3},{kHold,5}, END };
+static const PV tapeBus[]     = { C(kBus,-20,2.5f,8,20,180,1.5f), {kCharacter,3},{kDrive,45},{kCharPos,1}, END };
+static const PV dialog[]      = { C(kVersatile,-24,3,8,10,200,2), {kAutoThreshold,1},{kAutoRelease,1}, END };
+static const PV pulsePump[]   = { C(kPumping,-12,6,0,1,180,1), {kPulse,1},{kPulseSync,2},{kPulseLength,20},{kExpert,1}, END };
+static const PV midiPump[]    = { C(kPumping,-12,6,0,1,200,1), {kMidiTrigger,1},{kExpert,1}, END };
+#undef SCB
 } // namespace pv
 #undef C
 #undef END
@@ -68,6 +86,11 @@ static const PresetDef kPresetDefs[] = {
     {"Wide Bus", "Bus & Master", pv::wideBus}, {"Mid/Side Control", "Bus & Master", pv::msControl}, {"Low-End Glue", "Bus & Master", pv::lowGlue},
     {"Sidechain Duck", "Creative", pv::duck}, {"Kick Pump", "Creative", pv::pump}, {"New York", "Creative", pv::newYork},
     {"Squash", "Creative", pv::squash}, {"Sustainer", "Creative", pv::sustainer}, {"Lo-Fi Crush", "Creative", pv::lofi},
+    {"Vocal Rider", "Vocals", pv::vocalRider}, {"El-Op Vocal", "Vocals", pv::elOpVocal}, {"De-Ess (SC EQ)", "Vocals", pv::deEssEq},
+    {"Punch Drums", "Drums", pv::punchDrums}, {"To The Max", "Drums", pv::ttmDrums}, {"Upward Detail", "Drums", pv::upwardDetail},
+    {"Vari-Mu Bass", "Bass & Keys", pv::variMuBass}, {"Smooth Keys", "Bass & Keys", pv::smoothKeys},
+    {"Bus Glue 2", "Bus & Master", pv::busGlue}, {"Mastering Glue", "Bus & Master", pv::masterGlue}, {"Peak Limiter", "Bus & Master", pv::peakLimit}, {"Tape Bus", "Bus & Master", pv::tapeBus},
+    {"Dialog Leveler", "Creative", pv::dialog}, {"Tempo Pump", "Creative", pv::pulsePump}, {"MIDI Pump", "Creative", pv::midiPump},
 };
 static constexpr uint32_t kNumPresets = sizeof(kPresetDefs) / sizeof(kPresetDefs[0]);
 
