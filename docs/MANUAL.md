@@ -1,4 +1,4 @@
-# Gneiss 2.0 — User Manual
+# Gneiss 2.1 — User Manual
 
 Gneiss is a stereo compressor. It has:
 

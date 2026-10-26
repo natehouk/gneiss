@@ -203,7 +203,7 @@ New parameters, styles and presets are only ever appended, so saved sessions and
 
 ## Changelog
 
-- **Unreleased:** the preset browser searches names and categories as you type, and keeps Favourites.
+- **2.1:** the preset browser searches names and categories as you type, and keeps Favourites.
 - **2.0:** Brings Gneiss up to Pro-C 3. New in this version:
   - Eleven new styles, including Upward, TTM, Vari-Mu and El-Op.
   - Hold, range, gain-change mix up to 200%, and lookahead.
