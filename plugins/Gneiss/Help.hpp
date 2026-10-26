@@ -97,7 +97,7 @@ inline const char* targetTip(int t) {
     case kTipA: case kTipB: return "Gneiss keeps two complete settings, A and B. Click the other letter to switch and compare by ear.";
     case kTipCopy: return "Copies the current setting to the other slot.";
     case kTipPrev: return "Load the previous preset. The mouse wheel over the preset name also steps through presets.";
-    case kTipPresets: return "Open the preset browser. A * after the name means you have changed it.";
+    case kTipPresets: return "Open the preset browser. A * after the name means you have changed it. In the browser, type to search names and categories, and click a star to keep a preset in Favourites.";
     case kTipNext: return "Load the next preset.";
     case kTipLevelDisplay: return "The last few seconds: input level (grey), output level (colour), gain reduction (red, from the top) and upward boost (green). The dashed line is the threshold; drag to move it.";
     case kTipCurve: return "Input level (horizontal) against output level (vertical), before make-up gain. The dot shows the current input level. Drag left and right to move the threshold.";

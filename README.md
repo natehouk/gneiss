@@ -117,6 +117,7 @@ xattr -dr com.apple.quarantine ~/Library/Audio/Plug-Ins/*/Gneiss*
   - double-click to type a value
   - Cmd/Ctrl-click to reset
 - **46 factory presets**: the 31 from 1.x plus 15 new ones. You can also save your own user presets.
+- The preset browser **searches** names and categories as you type, and a star keeps a preset in **Favourites**.
 - **Hover tips** on every control. The **HELP** window has seven pages, and there is a **[full manual](docs/MANUAL.md)** (also in every release zip as `Gneiss-Manual.html`).
 - **Resizable** window.
 
@@ -202,6 +203,7 @@ New parameters, styles and presets are only ever appended, so saved sessions and
 
 ## Changelog
 
+- **Unreleased:** the preset browser searches names and categories as you type, and keeps Favourites.
 - **2.0:** Brings Gneiss up to Pro-C 3. New in this version:
   - Eleven new styles, including Upward, TTM, Vari-Mu and El-Op.
   - Hold, range, gain-change mix up to 200%, and lookahead.
